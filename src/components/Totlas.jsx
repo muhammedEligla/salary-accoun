@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+import { TextLang } from '../App';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,6 +38,7 @@ function createData(name, calories, fat) {
 
 
 export default function Totals() {
+  const text = useContext(TextLang)
   const data = useSelector((state)=> state.todos);
   const today = ((data.today * data.hourwork) - data.absence) / data.hourwork
 
@@ -59,9 +62,9 @@ const rows = [
       <Table sx={{ minWidth: 200 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell >راتبك</StyledTableCell>
-            <StyledTableCell align="right">مجموع الاضافي</StyledTableCell>
-            <StyledTableCell align="right">المجموع النهائي</StyledTableCell>
+            <StyledTableCell >{text.text.yourSalary}</StyledTableCell>
+            <StyledTableCell align="right">{text.text.totaltheExtra}</StyledTableCell>
+            <StyledTableCell align="right">{text.text.total}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

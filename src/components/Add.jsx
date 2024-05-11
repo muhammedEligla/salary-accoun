@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Box, Button, Container, Divider, Stack, TextField, useTheme } from "@mui/material";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addDoble, addExtra, removeH } from "../rtk/DateSlice";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { TextLang } from "../App";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -46,6 +47,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 const Add = () => {
+  const text = useContext(TextLang)
     const theme = useTheme()
   const data = useSelector((state)=> state.todos);
 
@@ -58,9 +60,7 @@ const Add = () => {
     const dobleRef = useRef(null);
     const extraRef = useRef(null);
 
-    let added = +extra + +doble + +mainus;
-    added === 1 ? added = 'ساعة' : added === 2 ? added = 'ساعتان' : added = `${added} ساعات` ;
- const notify = () => toast.success(`تمت اضافة ${added}`);
+ const notify = () => toast.success(text.text.added);
     
 
     const dispatch = useDispatch();
@@ -95,7 +95,10 @@ const Add = () => {
     
 const rows = [
     data.list.map((item)=>{
-        return createData(item.type, item.value , item.date )
+      const type = item.type === 'x1.5 اضافي ' ? text.text.extra : item.type === 'x2 اضافي ' ? 
+        text.text.doble : text.text.absn
+      
+        return createData(type, item.value , item.date )
       })
   ];
 
@@ -104,24 +107,13 @@ const rows = [
       <Container>
         <Box sx={{textAlign:'center',minHeight:"80vh"}}>
             <Stack direction={'row'} sx={{gap:2 , justifyContent:'space-between' , my:7}}>
-                <TextField inputRef={mainusRef} onChange={(event)=> setMainus(event.target.value)} label='الغياب'  type="number" variant="filled" />
-                <TextField inputRef={dobleRef} onChange={(event)=> setDoble(event.target.value)} label='x2 الاضافي'  type="number" variant="filled" />
-                <TextField inputRef={extraRef} onChange={(event)=> setExtra(event.target.value)} label='x1.5 الاضافي'  type="number" variant="filled" />
+                <TextField inputRef={mainusRef} onChange={(event)=> setMainus(event.target.value)} label={text.text.absn}  type="number" variant="filled" />
+                <TextField inputRef={dobleRef} onChange={(event)=> setDoble(event.target.value)} label={text.text.doble}  type="number" variant="filled" />
+                <TextField inputRef={extraRef} onChange={(event)=> setExtra(event.target.value)} label={text.text.extra}  type="number" variant="filled" />
             </Stack>
-            <Button onClick={handilClick} sx={{fontWeight:'bold' , px:5 , mb:5}} variant="contained">اضافة</Button>
+            <Button onClick={handilClick} sx={{fontWeight:'bold' , px:5 , mb:5}} variant="contained">{text.text.add}</Button>
 
             <Divider sx={{mb:2}} />
-
-
-
-
-
-
-
-
-
-
-
 
 
             <Box>
@@ -129,9 +121,9 @@ const rows = [
       <Table sx={{ minWidth: 200 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>النوع</StyledTableCell>
-            <StyledTableCell align="right">الاضافة</StyledTableCell>
-            <StyledTableCell align="right">التاريخ</StyledTableCell>
+            <StyledTableCell>{text.text.type}</StyledTableCell>
+            <StyledTableCell align="right">{text.text.theCount}</StyledTableCell>
+            <StyledTableCell align="right">{text.text.history}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -30,9 +30,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function createData(name, calories, fat) {
+
   return { name, calories, fat };
 }
-export default function SubTable({salary , totalExtra , total}) {
+export default function SubTable({salary , totalExtra , total , text}) {
 
 const rows = [
   createData( salary, totalExtra.toFixed(), total.toFixed()),
@@ -44,9 +45,9 @@ const rows = [
       <Table sx={{ minWidth: 200 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell >راتبك</StyledTableCell>
-            <StyledTableCell align="right">مجموع الاضافي</StyledTableCell>
-            <StyledTableCell align="right">المجموع النهائي</StyledTableCell>
+            <StyledTableCell >{text.yourSalary}</StyledTableCell>
+            <StyledTableCell align="right">{text.totaltheExtra}</StyledTableCell>
+            <StyledTableCell align="right">{text.total}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -11,6 +11,8 @@ import { Box, Container, Typography } from '@mui/material';
 import Totals from './Totlas';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { TextLang } from '../App';
+import { useContext } from 'react';
 
 
 
@@ -40,6 +42,8 @@ function createData(name, calories, fat, carbs) {
 
 
 export default function Home() {
+
+  const text = useContext(TextLang)
   
   const data = useSelector((state)=> state.todos);
  
@@ -62,10 +66,10 @@ export default function Home() {
 
 
 const rows = [
-  createData('الدوام العادي', today.toFixed(1) , today * data.hourwork , salary.toFixed()),
-  createData('xالاضافي 1.5', extraDays.toFixed(1) , extra , extraSalary.toFixed()),
-  createData('xالاضافي 2', dobleDays.toFixed(1) ,dobleExtra , dobleSalary.toFixed()),
-  createData('الغياب', absenceDays.toFixed(1) , absence, absenceSalary.toFixed(),)
+  createData(text.text.normal , today.toFixed(1) , today * data.hourwork , salary.toFixed()),
+  createData(text.text.extra, extraDays.toFixed(1) , extra , extraSalary.toFixed()),
+  createData(text.text.doble, dobleDays.toFixed(1) ,dobleExtra , dobleSalary.toFixed()),
+  createData(text.text.absn, absenceDays.toFixed(1) , absence, absenceSalary.toFixed(),)
 ];
 
 
@@ -91,9 +95,9 @@ const date = moment().format('LL');
         <TableHead>
           <TableRow>
             <StyledTableCell>   </StyledTableCell>
-            <StyledTableCell align="right">ايام</StyledTableCell>
-            <StyledTableCell align="right">ساعات</StyledTableCell>
-            <StyledTableCell align="right"> TL الاجرة</StyledTableCell>
+            <StyledTableCell align="right">{text.text.days}</StyledTableCell>
+            <StyledTableCell align="right">{text.text.hours}</StyledTableCell>
+            <StyledTableCell align="right">{text.text.salary}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

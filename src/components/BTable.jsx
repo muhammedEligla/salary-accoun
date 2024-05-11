@@ -11,9 +11,12 @@ import { Box, Button, Divider, Typography } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { removeItem } from '../rtk/DateSlice';
+import { useContext } from 'react';
+import { TextLang } from '../App';
 
 export default function BTable({extra , doble , today , absence , salary , hourwork , date}) {
 
+  const text = useContext(TextLang).text;
   const dispatch = useDispatch();
 
 
@@ -43,10 +46,10 @@ function createData(name, calories, fat, carbs) {
 }
 
 const rows = [
-  createData('الدوام العادي', day.toFixed(2) , normalhour ,normalSalary.toFixed() ),
-  createData('xالاضافي 1.5', extraDay.toFixed(2), extra, extraSalary.toFixed()),
-  createData('xالاضافي 2', dobleDay.toFixed(2), doble,dobleSalary.toFixed()),
-  createData('الغياب', absenceDay.toFixed(2), absence,absencelary.toFixed()),
+  createData(text.normal, day.toFixed(2) , normalhour ,normalSalary.toFixed() ),
+  createData(text.extra, extraDay.toFixed(2), extra, extraSalary.toFixed()),
+  createData(text.doble, dobleDay.toFixed(2), doble,dobleSalary.toFixed()),
+  createData(text.absn, absenceDay.toFixed(2), absence,absencelary.toFixed()),
 ];
 
 
@@ -62,9 +65,9 @@ const rows = [
             <TableCell>
             <Button onClick={()=> dispatch(removeItem(date))}><Close /></Button>
             </TableCell>
-            <TableCell align="right">ايام</TableCell>
-            <TableCell align="right">ساعات</TableCell>
-            <TableCell align="right">الاجرة</TableCell>
+            <TableCell align="right">{text.days}</TableCell>
+            <TableCell align="right">{text.hours}</TableCell>
+            <TableCell align="right">{text.salary}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -84,7 +87,7 @@ const rows = [
         </TableBody>
       </Table>
     </TableContainer>
-    <SubTable salary={salary} totalExtra={totalExtra} total={normalSalary + totalExtra} />
+    <SubTable text={text} salary={salary} totalExtra={totalExtra} total={normalSalary + totalExtra} />
     </Box>
     <Divider />
     </>

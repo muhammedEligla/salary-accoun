@@ -5,7 +5,7 @@ import Appbar from './components/AppBar'
 import List from './components/List'
 import Add from './components/Add'
 import Settings from './components/Settings'
-import { useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useReducer, useState } from 'react';
 import { getDesignTokens } from './theming/getDesignTokens';
 
 import {
@@ -20,12 +20,16 @@ import Footer from './components/Footer';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { checked, clear } from './rtk/DateSlice';
+import reducer, { initialState } from './slices/Reducer';
 
-
+// @ts-ignore
+export const TextLang = createContext()
 
 
 
 function App() {
+
+  const [language , disLanguage ] = useReducer(reducer , initialState);
   const checkDay =  moment().date()
   const dispatch = useDispatch()
   // @ts-ignore
@@ -46,11 +50,13 @@ function App() {
 
 const Layout = ()=>{
   return(
+    <TextLang.Provider value={{text:language , setting:disLanguage}} >
     <>
     <Appbar />
     <Outlet />
     <Footer />
     </>
+    </TextLang.Provider>
   )
 }
 

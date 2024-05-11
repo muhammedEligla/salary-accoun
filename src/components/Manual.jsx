@@ -10,9 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import { Box, Container, TextField } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSelector } from 'react-redux';
 import SubTable from './SubTable';
+import { TextLang } from '../App';
 
 
 
@@ -50,6 +51,8 @@ const Manual = () => {
     const [doble , setDoble ] = useState(0);
     const [salary , setSalary ] = useState(0);
 
+    const text = useContext(TextLang).text;
+
     const data = useSelector((state)=> state.todos);
 
 
@@ -64,10 +67,10 @@ const Manual = () => {
 
 
   const rows = [
-    createData('الدوام العادي', days, normalHour, subSalary.toFixed() ),
-    createData('الاضافي x1.5', extra / data.hourwork , extra , extraSalary.toFixed() ),
-    createData('الاضافي x2', doble / data.hourwork , doble, (hourSalary * 2) * doble ),
-    createData('الغياب', abons / data.hourwork , abons ,(hourSalary * abons).toFixed() ),
+    createData(text.normal, days, normalHour, subSalary.toFixed() ),
+    createData(text.extra, extra / data.hourwork , extra , extraSalary.toFixed() ),
+    createData(text.doble, doble / data.hourwork , doble, (hourSalary * 2) * doble ),
+    createData(text.absn, abons / data.hourwork , abons ,(hourSalary * abons).toFixed() ),
   ];
 
 
@@ -76,23 +79,23 @@ const Manual = () => {
         <Box>
             <Box sx={{display:'flex' , flexDirection:'row' , flexWrap:'wrap' , gap:2, mb:5}}>
 
-            <TextField label="ايام الدوام"
+            <TextField label={text.normal}
             variant="filled" type="number"
             sx={{flexGrow:1 , minWidth:'100px' , width:'130px'}} onChange={ (event) => setDays(event.target.value)} /> 
 
-            <TextField label="ساعات الغياب"
+            <TextField label={text.hoursABC}
             variant="filled" type="number"
             sx={{flexGrow:1 , minWidth:'100px' , width:'130px'}} onChange={(event) => setAbons(event.target.value)} /> 
 
-            <TextField label="x1.5 ساعات الاضافي "
+            <TextField label={text.extra}
             variant="filled" type="number"
             sx={{flexGrow:1 , minWidth:'100px' , width:'130px'}} onChange={(event) => setExtra(event.target.value)} /> 
 
-            <TextField label="x2 ساعات الاضافي "
+            <TextField label={text.doble}
             variant="filled" type="number"
             sx={{flexGrow:1 , minWidth:'100px' , width:'130px'}} onChange={(event) => setDoble(event.target.value)} /> 
 
-            <TextField label="راتبك"
+            <TextField label={text.yourSalary}
             variant="filled" type="number"
             sx={{flexGrow:1 , minWidth:'100px' , width:'100%'}} onChange={(event) => setSalary(event.target.value)} /> 
 
@@ -105,9 +108,9 @@ const Manual = () => {
         <TableHead>
           <TableRow>
             <StyledTableCell></StyledTableCell>
-            <StyledTableCell align="right">ايام</StyledTableCell>
-            <StyledTableCell align="right">ساعات</StyledTableCell>
-            <StyledTableCell align="right">الاجرة </StyledTableCell>
+            <StyledTableCell align="right">{text.days}</StyledTableCell>
+            <StyledTableCell align="right">{text.hours}</StyledTableCell>
+            <StyledTableCell align="right">{text.salary} </StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -128,7 +131,7 @@ const Manual = () => {
     </TableContainer>
     
     </Box>
-    <SubTable salary={salary} totalExtra={totalExtra} total={(subSalary + totalExtra) - ( hourSalary * abons)} />
+    <SubTable text={text} salary={salary} totalExtra={totalExtra} total={(subSalary + totalExtra) - ( hourSalary * abons)} />
         </Box>
         </Container>
     );
