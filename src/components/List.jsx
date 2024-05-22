@@ -2,9 +2,12 @@
 import { useSelector } from "react-redux";
 import BTable from "./BTable";
 import { Box, Container, Typography } from "@mui/material";
+import { useContext } from "react";
+import { TextLang } from "../App";
 
 
 const List = () => {
+    const text = useContext(TextLang).text
   const data = useSelector((state)=> state.todos);
 if(data.monthAgo.length > 0){
     return (
@@ -23,7 +26,7 @@ if(data.monthAgo.length > 0){
     );
 }else{
     return(
-        <Typography sx={{display:'flex' , justifyContent:'center' , alignItems:'center'}} variant="h3" >... لايوجد </Typography>
+        <Typography sx={{display:'flex' , justifyContent:'center' , alignItems:'center'}} variant="h5" >{text.list}</Typography>
     )
 }
     

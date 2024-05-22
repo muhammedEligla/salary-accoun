@@ -38,7 +38,7 @@ function createData(name, calories, fat) {
 
 
 export default function Totals() {
-  const text = useContext(TextLang)
+  const text = useContext(TextLang).text
   const data = useSelector((state)=> state.todos);
   const today = ((data.today * data.hourwork) - data.absence) / data.hourwork
 
@@ -62,9 +62,9 @@ const rows = [
       <Table sx={{ minWidth: 200 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell >{text.text.yourSalary}</StyledTableCell>
-            <StyledTableCell align="right">{text.text.totaltheExtra}</StyledTableCell>
-            <StyledTableCell align="right">{text.text.total}</StyledTableCell>
+            <StyledTableCell >{text.yourSalary}</StyledTableCell>
+            <StyledTableCell align="right">{text.totaltheExtra}</StyledTableCell>
+            <StyledTableCell align="right">{text.total}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -47,7 +47,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 const Add = () => {
-  const text = useContext(TextLang)
+  const text = useContext(TextLang).text
     const theme = useTheme()
   const data = useSelector((state)=> state.todos);
 
@@ -60,7 +60,7 @@ const Add = () => {
     const dobleRef = useRef(null);
     const extraRef = useRef(null);
 
- const notify = () => toast.success(text.text.added);
+ const notify = () => toast.success(text.added);
     
 
     const dispatch = useDispatch();
@@ -95,8 +95,8 @@ const Add = () => {
     
 const rows = [
     data.list.map((item)=>{
-      const type = item.type === 'x1.5 اضافي ' ? text.text.extra : item.type === 'x2 اضافي ' ? 
-        text.text.doble : text.text.absn
+      const type = item.type === 'x1.5 اضافي ' ? text.extra : item.type === 'x2 اضافي ' ? 
+        text.doble : text.absn
       
         return createData(type, item.value , item.date )
       })
@@ -107,11 +107,11 @@ const rows = [
       <Container>
         <Box sx={{textAlign:'center',minHeight:"80vh"}}>
             <Stack direction={'row'} sx={{gap:2 , justifyContent:'space-between' , my:7}}>
-                <TextField inputRef={mainusRef} onChange={(event)=> setMainus(event.target.value)} label={text.text.absn}  type="number" variant="filled" />
-                <TextField inputRef={dobleRef} onChange={(event)=> setDoble(event.target.value)} label={text.text.doble}  type="number" variant="filled" />
-                <TextField inputRef={extraRef} onChange={(event)=> setExtra(event.target.value)} label={text.text.extra}  type="number" variant="filled" />
+                <TextField inputRef={mainusRef} onChange={(event)=> setMainus(event.target.value)} label={text.absn}  type="number" variant="filled" />
+                <TextField inputRef={dobleRef} onChange={(event)=> setDoble(event.target.value)} label={text.doble}  type="number" variant="filled" />
+                <TextField inputRef={extraRef} onChange={(event)=> setExtra(event.target.value)} label={text.extra}  type="number" variant="filled" />
             </Stack>
-            <Button onClick={handilClick} sx={{fontWeight:'bold' , px:5 , mb:5}} variant="contained">{text.text.add}</Button>
+            <Button onClick={handilClick} sx={{fontWeight:'bold' , px:5 , mb:5}} variant="contained">{text.add}</Button>
 
             <Divider sx={{mb:2}} />
 
@@ -121,9 +121,9 @@ const rows = [
       <Table sx={{ minWidth: 200 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>{text.text.type}</StyledTableCell>
-            <StyledTableCell align="right">{text.text.theCount}</StyledTableCell>
-            <StyledTableCell align="right">{text.text.history}</StyledTableCell>
+            <StyledTableCell>{text.type}</StyledTableCell>
+            <StyledTableCell align="right">{text.theCount}</StyledTableCell>
+            <StyledTableCell align="right">{text.history}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

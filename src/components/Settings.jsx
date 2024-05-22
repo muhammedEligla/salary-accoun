@@ -14,7 +14,7 @@ import { TextLang } from '../App';
 
 const Settings = ({setMode}) => {
 
-    const text = useContext(TextLang)
+    const text = useContext(TextLang).text
     const displaylang = useContext(TextLang)
     const langType = localStorage.langType ? localStorage.langType : 'AR'
     const [lang, setLang] = useState(langType);
@@ -32,7 +32,7 @@ const Settings = ({setMode}) => {
     const dispatch = useDispatch();
 
 
- const notify = () => toast.success(text.text.done);
+ const notify = () => toast.success(text.done);
 
 
     const [salary , setSalary] = useState(17002)
@@ -58,7 +58,7 @@ const Settings = ({setMode}) => {
                         }}>
                         {mode === 'dark' ? <LightMode sx={{color:'gold'}} /> : <DarkModeOutlined /> }
             </IconButton>
-            <Typography sx={{display:'inline-block' , mr:1}} variant="body1">{text.text.mode}</Typography>
+            <Typography sx={{display:'inline-block' , mr:1}} variant="body1">{text.mode}</Typography>
         </Paper>
 
         <Paper sx={{display:'flex' , alignItems:'center',justifyContent:'space-between',bgcolor:theme.palette.background.default}}>
@@ -76,7 +76,7 @@ const Settings = ({setMode}) => {
   >
     <MenuItem value={'AR'}>العربية</MenuItem>
     <MenuItem value={'EN'}>English</MenuItem>
-    <MenuItem value={'TU'}>Turkish</MenuItem>
+    <MenuItem value={'TU'}>Türkçe</MenuItem>
   </Select>
 </FormControl>
             </Box>
@@ -90,7 +90,7 @@ const Settings = ({setMode}) => {
                 <Button onClick={()=> notify()  & handleSalary() } variant="contained">OK</Button>
                 ): (<Button variant="contained" disabled >OK</Button>)}
             <TextField
-            label={text.text.yourSalary}
+            label={text.yourSalary}
             type="number"
             autoComplete="current-password"
             onChange={(event)=> setSalary(+event.target.value) }
@@ -104,7 +104,7 @@ const Settings = ({setMode}) => {
                 <Button onClick={()=> dispatch(settingHourW(hourW)) & notify()} variant="contained">OK</Button>
             ):(<Button disabled variant="contained">OK</Button>)}
             <TextField
-            label={text.text.realyWork}
+            label={text.realyWork}
             defaultValue={hourW}
             type="number"
             autoComplete="current-password"

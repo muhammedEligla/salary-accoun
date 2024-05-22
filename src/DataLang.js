@@ -17,7 +17,8 @@ export const ar = {
     hoursABC:'ساعات الغياب',
     done:'تم التعديل',
     theCount:'عدد الساعات',
-    added:'تمت الاضافة'
+    added:'تمت الاضافة',
+    list:'ستظهر هنا قائمة عمل الاشهر الماضية'
 
 };
 
@@ -41,7 +42,8 @@ export const en = {
     hoursABC:'HOURS ABSENCE',
     done:'Modified',
     theCount:'count the hours',
-    added:'Added'
+    added:'Added',
+    list:'A list of work for the past months will appear here.'
 
 };
 
@@ -64,6 +66,7 @@ export const tu ={
     hoursABC:'DEVAMSIZLİK SAATİ',
     done:'Değiştirilmiş',
     theCount:'Saat sayısı',
-    added:'katma'
+    added:'katma',
+    list:'Geçtiğimiz aylara ait işlerin bir listesi burada görünecek.'
 
 }

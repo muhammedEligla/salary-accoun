@@ -43,7 +43,7 @@ function createData(name, calories, fat, carbs) {
 
 export default function Home() {
 
-  const text = useContext(TextLang)
+  const text = useContext(TextLang).text
   
   const data = useSelector((state)=> state.todos);
  
@@ -66,10 +66,10 @@ export default function Home() {
 
 
 const rows = [
-  createData(text.text.normal , today.toFixed(1) , today * data.hourwork , salary.toFixed()),
-  createData(text.text.extra, extraDays.toFixed(1) , extra , extraSalary.toFixed()),
-  createData(text.text.doble, dobleDays.toFixed(1) ,dobleExtra , dobleSalary.toFixed()),
-  createData(text.text.absn, absenceDays.toFixed(1) , absence, absenceSalary.toFixed(),)
+  createData(text.normal , today.toFixed(1) , today * data.hourwork , salary.toFixed()),
+  createData(text.extra, extraDays.toFixed(1) , extra , extraSalary.toFixed()),
+  createData(text.doble, dobleDays.toFixed(1) ,dobleExtra , dobleSalary.toFixed()),
+  createData(text.absn, absenceDays.toFixed(1) , absence, absenceSalary.toFixed(),)
 ];
 
 
@@ -95,9 +95,9 @@ const date = moment().format('LL');
         <TableHead>
           <TableRow>
             <StyledTableCell>   </StyledTableCell>
-            <StyledTableCell align="right">{text.text.days}</StyledTableCell>
-            <StyledTableCell align="right">{text.text.hours}</StyledTableCell>
-            <StyledTableCell align="right">{text.text.salary}</StyledTableCell>
+            <StyledTableCell align="right">{text.days}</StyledTableCell>
+            <StyledTableCell align="right">{text.hours}</StyledTableCell>
+            <StyledTableCell align="right">{text.salary}</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
